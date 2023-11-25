@@ -99,6 +99,8 @@ Rails.application.configure do
     Bullet.enable = true
     Bullet.console = true
   end
+
+  config.webpacker.check_yarn_integrity = false
 end
 
 # rubocop:enable Metrics/BlockLength
