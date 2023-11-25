@@ -1,7 +1,7 @@
 # rubocop:disable Metrics/BlockLength
 #
 def yarn_integrity_enabled?
-  ENV.fetch("YARN_INTEGRITY_ENABLED", "true") == "true"
+  ENV.fetch("YARN_INTEGRITY_ENABLED", "false") == "true"
 end
 
 Rails.application.configure do
@@ -13,10 +13,10 @@ Rails.application.configure do
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
-  config.cache_classes = false
+  config.cache_classes = true
 
   # Do not eager load code on boot.
-  config.eager_load = false
+  config.eager_load = true
 
   # Show full error reports and disable caching.
   config.consider_all_requests_local = true
@@ -56,6 +56,9 @@ Rails.application.configure do
   # Supress logger output for asset requests.
   config.assets.quiet = true
 
+  # Do not fallback to assets pipeline if a precompiled asset is missed.
+  config.assets.compile = true
+
   # Adds additional error checking when serving assets at runtime.
   # Checks for improperly declared sprockets dependencies.
   # Raises helpful error messages.
@@ -94,13 +97,6 @@ Rails.application.configure do
   logger = Timber::Logger.new(log_device)
   logger.level = config.log_level
   config.logger = ActiveSupport::TaggedLogging.new(logger)
-
-  config.after_initialize do
-    Bullet.enable = true
-    Bullet.console = true
-  end
-
-  config.webpacker.check_yarn_integrity = false
 end
 
 # rubocop:enable Metrics/BlockLength

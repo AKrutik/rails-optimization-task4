@@ -107,7 +107,6 @@ group :development do
   gem "better_errors", "~> 2.5"
   gem "binding_of_caller", "~> 0.8"
   gem "brakeman", "~> 4.4", require: false
-  gem "bullet", "~> 5.9"
   gem "bundler-audit", "~> 0.6"
   gem "derailed_benchmarks", "~> 1.3"
   gem "guard", "~> 2.15", require: false
@@ -117,7 +116,11 @@ group :development do
   gem "web-console", "~> 3.7"
 end
 
-group :development, :test do
+group :development, :profile do
+  gem "bullet", "~> 5.9"
+end
+
+group :development, :test, :profile do
   gem "capybara", "~> 3.13"
   gem "derailed", "~> 0.1"
   gem "erb_lint", "~> 0.0", require: false
@@ -149,11 +152,16 @@ group :test do
   gem "shoulda-matchers", "4.0.0.rc1", require: false
   gem "simplecov", "~> 0.16", require: false
   gem "sinatra", "~> 2.0"
-  gem "stackprof", "~> 0.2", require: false, platforms: :ruby
   gem "stripe-ruby-mock", "~> 2.5", require: "stripe_mock"
   gem "test-prof", "~> 0.7"
   gem "timecop", "~> 0.9"
   gem "webmock", "~> 3.5"
   gem "zonebie", "~> 0.6.1"
 end
+
+gem "rack-mini-profiler", require: false
+gem "stackprof", require: false
+gem "newrelic_rpm"
+gem "prometheus_exporter"
+
 # rubocop:enable LineLength
